@@ -144,3 +144,30 @@ Defines the dotted path to a custom Image model; please include the model name.
 Example: 'my.app.models.CustomImage'
 
 Defaults to ``False``
+
+
+``FILER_DEFAULT_FOLDER_GETTER``
+-------------------------------
+
+Path to a subclass of `filer.utils.folders.DefaultFolderGetter`.
+Methods name of this subclass can be used as value for the 
+`default_folder_key` of ``FilerFileField`` and ``FilerImageField``.
+
+e.g::
+
+    FILER_DEFAULT_FOLDER_GETTER = 'myapp.handlers.FolderGetter'
+
+and in myapp/hanlers.py::
+
+    from filer.utils.folders import DefaultFolderGetter
+    
+    class FolderGetter(DefaultFolderGetter):
+        @classmethod
+        def USER_OWN_FOLDER(cls, request):
+            if not request.user.is_authenticated():
+                return None
+            parent_kwargs = {
+                name: 'users_files',
+                
+            }
+            return cls._get_or_create(name=user.username, owner=user, parent_kwargs=parent_kwargs)

@@ -14,6 +14,7 @@ HELPER_SETTINGS = {
         'mptt',
         'filer',
         'filer.test_utils.test_app',
+        'filer.test_utils.thirdparty_app',
     ],
     'LANGUAGE_CODE': 'en',
     'LANGUAGES': (
@@ -50,7 +51,8 @@ HELPER_SETTINGS = {
         'easy_thumbnails.processors.filters',
     ),
     'FILE_UPLOAD_TEMP_DIR': mkdtemp(),
-    'FILER_IMAGE_MODEL': False
+    'FILER_IMAGE_MODEL': False,
+    'FILER_DEFAULT_FOLDER_GETTER': 'filer.test_utils.thirdparty_app.handlers.CustomFolderGetter',
 
 }
 if os.environ.get('CUSTOM_IMAGE', False):

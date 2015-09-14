@@ -16,11 +16,11 @@
     }
 
     $(document).ready(function(){
-        $('.filerFile .vForeignKeyRawIdAdminField').attr('type', 'hidden');
+        $('.filerFile .vForeignKeyRawIdAdminField').hide();
         //if this file is included multiple time, we ensure that filer_clear is attached only once.
         $(document).off('click.filer', '.filerFile .filerClearer', filer_clear).on('click.filer', '.filerFile .filerClearer', filer_clear);
     });
-})(django.jQuery);
+})(window.$ || django.jQuery);
 
 if(window.FormData){
     (function($){
@@ -29,7 +29,7 @@ if(window.FormData){
         $('.filerUploader > strong').remove();
         $('.filerUploader > span').show();
         var form = $('FORM .filerUploader').first().closest('form').get(0);
-        if(typeof form.filer_uploading === 'undefined'){
+        if(form && typeof form.filer_uploading === 'undefined'){
             form.filer_uploading = 0 ;
             $(form).submit(function(e){
                 if(this.filer_uploading > 0){

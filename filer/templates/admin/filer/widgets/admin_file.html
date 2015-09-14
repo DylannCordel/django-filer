@@ -41,18 +41,4 @@
 <br />
 {{ hidden_input }}
 
-{% block object_javascript %}
-<script type="text/javascript" id="{{id}}_javascript">
-	django.jQuery('#{{id}}').attr('type', 'hidden').attr('data-filer', 1);
-	django.jQuery(document).ready(function(){
-		var plus = django.jQuery("#add_{{ id }}");
-		if (plus.length){
-			plus.remove();
-		}
-		{# Delete this javascript once loaded to avoid the "add new" link duplicates it #}
-		django.jQuery('#{{id}}_javascript').remove();
-	});
-</script>
-{% endblock object_javascript %}
-</span>
-{% endspaceless %}
+</span>{% endspaceless %}
